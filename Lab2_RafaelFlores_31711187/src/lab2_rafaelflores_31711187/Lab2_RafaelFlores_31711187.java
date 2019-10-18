@@ -32,8 +32,10 @@ public class Lab2_RafaelFlores_31711187 {
             }else{
                 switch(op){
                     case 1:
+                        registro.add(Agregar());
                         break;
                     case 2:
+                        Listar(registro);
                         break;
                     case 3:
                         if (!log) {
@@ -54,6 +56,7 @@ public class Lab2_RafaelFlores_31711187 {
                     case 4:
                         break;
                     case 5:
+                        Listar(registro);
                         break;
                     case 6:
                         break;
@@ -80,6 +83,8 @@ public class Lab2_RafaelFlores_31711187 {
             nums = read.nextInt();
             if (nums > 2019) {
                 System.out.println("Debe ingresar menor que el año actual!");
+            }else{
+                u.setAñoCreacion(nums);
             }
         } while (nums > 2019);
         do {            
@@ -87,15 +92,20 @@ public class Lab2_RafaelFlores_31711187 {
             nums = read.nextInt();
             if (nums < 1) {
                 System.out.println("Debe existir al menos un maestro!");
+            }else{
+                u.setNumMaestro(nums);
             }
-        } while (nums > 1);
+            
+        } while (nums < 1);
         do {            
             System.out.println("Ingrese el número de estudiantes en la Universidad: ");
             nums = read.nextInt();
             if (nums < 1) {
                 System.out.println("Debe existir al menos un estudiante!");
+            }else{
+                u.setNumEstudiante(nums);
             }
-        } while (nums > 1);
+        } while (nums < 1);
         byte flag = 0;
         do {            
             System.out.println("Ingrese el nivel de la Universidad: "
@@ -105,10 +115,26 @@ public class Lab2_RafaelFlores_31711187 {
             if (nums < 1 || nums > 2) {
                 System.out.println("Debe escoger entre las opciones existentes!");
             }else{
+                if (nums == 1) {
+                    u.setNivel("Privada");
+                }else{
+                    u.setNivel("Publica");
+                }
                 flag = 1;
             }
         } while (flag == 0);
+        u.AddCosto();
         return u;
+    }
+    
+    public static void Listar(ArrayList<Universidad> temp){
+        System.out.println("+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
+        System.out.println("| Nombre U. | Nombre R. | Sucursal | Año C.| N. Maestros | N. Estudiantes |  Costo  |         Nivel        |");
+        System.out.println("+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
+        for (int i = 0; i < temp.size(); i++) {
+            System.out.print(temp.get(i).toString()+"\n");
+            System.out.print("+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+\n");
+        }
     }
     
 }

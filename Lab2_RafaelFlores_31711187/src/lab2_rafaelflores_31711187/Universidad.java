@@ -6,7 +6,7 @@ package lab2_rafaelflores_31711187;
 public class Universidad {
     private String nombre, nombreRector, sucursal, nivel;
     private int añoCreacion, numMaestro, numEstudiante; 
-    private float costo;
+    private double costo;
 
     public Universidad(String nombre, String nombreRector, String sucursal, String nivel, int añoCreacion, int numMaestro, int numEstudiante, float costo) {
         this.nombre = nombre;
@@ -49,7 +49,7 @@ public class Universidad {
         this.numEstudiante = numEstudiante;
     }
 
-    private void setCosto(float costo) {
+    private void setCosto(double costo) {
         this.costo = costo;
     }
 
@@ -81,34 +81,35 @@ public class Universidad {
         return numEstudiante;
     }
 
-    public float getCosto() {
+    public double getCosto() {
         return costo;
     }
     
     public void AddCosto(){
-        String chk = this.nivel;
-        switch(nivel){
-            case "publica":
-                this.setCosto(0);
+        String chk = this.getNivel();
+        switch(chk){
+            case "Publica":
+                this.setCosto(0.0);
                 break;
-            case "publica prestigiosa":
-                this.setCosto(200);
+            case "Publica Prestigiosa":
+                this.setCosto(200.0);
                 break;
-            case "nacional":
-                this.setCosto(500);
+            case "Nacional":
+                this.setCosto(500.0);
                 break;
-            case "privada":
-                this.setCosto(6000);
+            case "Privada":
+                this.setCosto(6000.0);
                 break;
-            case "pricada prestigiosa":
-                this.setCosto(12000);
+            case "Privada Prestigiosa":
+                this.setCosto(12000.0);
                 break;
         }
     }
     
     @Override
     public String toString(){
-        return "| "+this.getNombre()+" | "+this.getNombreRector()+" | "+this.getSucursal()+" | "+this.getAñoCreacion()+" | "+this.getNumMaestro()+" | "+this.getNumEstudiante()+" | "+this.getCosto()+" | "+this.getNivel()+" |";
+        String patron = "|%11s|%11s|%10s|%7d|%13d|%16d|%9.2f|%22s|";
+        return String.format(patron, this.getNombre(), this.getNombreRector(), this.getSucursal(), this.getAñoCreacion(), this.getNumMaestro(), this.getNumEstudiante(), this.getCosto(), this.getNivel());
     }
 }
     
