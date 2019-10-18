@@ -49,7 +49,7 @@ public class Universidad {
         this.numEstudiante = numEstudiante;
     }
 
-    public void setCosto(float costo) {
+    private void setCosto(float costo) {
         this.costo = costo;
     }
 
@@ -83,6 +83,27 @@ public class Universidad {
 
     public float getCosto() {
         return costo;
+    }
+    
+    public void AddCosto(){
+        String chk = this.nivel;
+        switch(nivel){
+            case "publica":
+                this.setCosto(0);
+                break;
+            case "publica prestigiosa":
+                this.setCosto(200);
+                break;
+            case "nacional":
+                this.setCosto(500);
+                break;
+            case "privada":
+                this.setCosto(6000);
+                break;
+            case "pricada prestigiosa":
+                this.setCosto(12000);
+                break;
+        }
     }
     
     @Override

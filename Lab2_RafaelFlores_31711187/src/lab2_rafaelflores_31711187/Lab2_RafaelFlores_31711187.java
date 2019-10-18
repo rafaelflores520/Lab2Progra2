@@ -3,12 +3,14 @@
  */
 package lab2_rafaelflores_31711187;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Lab2_RafaelFlores_31711187 {
     public static Scanner read = new Scanner(System.in);
     
     public static void main(String[] args) {
         boolean log = false;
+        ArrayList<Universidad> registro = new ArrayList<>();
         while (true) {            
             System.out.println("¡Bienvenido!");
             System.out.println("Ingrese la opción de su elección:"
@@ -62,6 +64,51 @@ public class Lab2_RafaelFlores_31711187 {
                 }
             }
         }
+    }
+    
+    public static Universidad Agregar(){
+        Universidad u = new Universidad();
+        System.out.println("Ingrese el nombre de la universidad: ");
+        u.setNombre(read.next());
+        System.out.println("Ingrese el nombre del rector de la universidad: ");
+        u.setNombreRector(read.next());
+        System.out.println("Ingrese la sucursal de la universidad: ");
+        u.setSucursal(read.next());
+        int nums;
+        do {            
+            System.out.println("Ingrese el año de creación de la Universidad: ");
+            nums = read.nextInt();
+            if (nums > 2019) {
+                System.out.println("Debe ingresar menor que el año actual!");
+            }
+        } while (nums > 2019);
+        do {            
+            System.out.println("Ingrese el número de maestros en la Universidad: ");
+            nums = read.nextInt();
+            if (nums < 1) {
+                System.out.println("Debe existir al menos un maestro!");
+            }
+        } while (nums > 1);
+        do {            
+            System.out.println("Ingrese el número de estudiantes en la Universidad: ");
+            nums = read.nextInt();
+            if (nums < 1) {
+                System.out.println("Debe existir al menos un estudiante!");
+            }
+        } while (nums > 1);
+        byte flag = 0;
+        do {            
+            System.out.println("Ingrese el nivel de la Universidad: "
+                    + "\n\t1. Privada"
+                    + "\n\t2. Pública");
+            nums = read.nextInt();
+            if (nums < 1 || nums > 2) {
+                System.out.println("Debe escoger entre las opciones existentes!");
+            }else{
+                flag = 1;
+            }
+        } while (flag == 0);
+        return u;
     }
     
 }
