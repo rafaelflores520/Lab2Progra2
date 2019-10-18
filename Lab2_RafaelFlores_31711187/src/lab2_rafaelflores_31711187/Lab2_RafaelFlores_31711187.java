@@ -176,12 +176,12 @@ public class Lab2_RafaelFlores_31711187 {
                             while(!flag){
                                 uNacional = rand.nextInt(registro.size());
                                 if (last == -1) {
-                                    if (registro.get(uNacional).getNivel().equals("Publica") || registro.get(uNacional).getNivel().equals("Publica Prestigiosa")) {
+                                    if (registro.get(uNacional).getNivel().equals("Publica Prestigiosa")) {
                                         Modificar(registro, uNacional, 7, "Nacional");
                                         flag = true;
                                     }
                                 }else{
-                                    if (registro.get(uNacional).getNivel().equals("Publica") || registro.get(uNacional).getNivel().equals("Publica Prestigiosa")) {
+                                    if (registro.get(uNacional).getNivel().equals("Publica Prestigiosa")) {
                                         Modificar(registro, last, 7, "Publica Prestigiosa");
                                         Modificar(registro, uNacional, 7, "Nacional");
                                         flag = true;
@@ -323,7 +323,6 @@ public class Lab2_RafaelFlores_31711187 {
                 temp.get(pos).setNumEstudiante(read.nextInt());
                 break;
             case 7:
-                System.out.println("Ingrese el nuevo estado de la Universidad");
                 temp.get(pos).setNivel(nivel);
                 break;
         }
