@@ -67,7 +67,40 @@ public class Lab2_RafaelFlores_31711187 {
                         }
                         break;
                     case 4:
-                        
+                        if (registro.isEmpty()) {
+                            System.out.println("No hay nada que mostrar!");
+                        }else{
+                            Listar(registro);
+                            System.out.println("Ingrese la Universidad a Ascender: ");
+                            pos = read.nextInt();
+                            if (pos < 0 || pos > registro.size() - 1) {
+                                System.out.println("Abortando! Debe ingresar una posición válida");
+                            } else {
+                                String cambio = registro.get(pos).getNivel();
+                                switch(cambio){
+                                    case "Publica":
+                                        registro.get(pos).setNivel("Publica Prestigiosa");
+                                        break;
+                                    case "Publica Prestigiosa":
+                                        if (uNacional != -1) {
+                                            registro.get(pos).setNivel("Publica Prestigiosa");
+                                        }else{
+                                            System.out.println("Ya existe una universidad nacional");
+                                        }
+                                        break;
+                                    case "Nacional":
+                                        System.out.println("No puede Subir más de nivel");
+                                        break;
+                                    case "Privada":
+                                        registro.get(pos).setNivel("Privada Prestigiosa");
+                                        break;
+                                    case "Privada Prestigiosa":
+                                        System.out.println("No puede Subir más de nivel");
+                                        break;
+                                }
+                                System.out.println("La subida de nivel se realizo con éxito");
+                            }
+                        }
                         break;
                     case 5:
                         if (registro.isEmpty()) {
