@@ -11,6 +11,7 @@ public class Lab2_RafaelFlores_31711187 {
     public static void main(String[] args) {
         boolean log = false;
         ArrayList<Universidad> registro = new ArrayList<>();
+        int pos;
         while (true) {            
             System.out.println("¡Bienvenido!");
             System.out.println("Ingrese la opción de su elección:"
@@ -35,7 +36,18 @@ public class Lab2_RafaelFlores_31711187 {
                         registro.add(Agregar());
                         break;
                     case 2:
-                        Listar(registro);
+                        if (registro.isEmpty()) {
+                            System.out.println("No hay nada que mostrar!");
+                        }else{
+                            Listar(registro);
+                            System.out.println("Ingrese la posición a eliminar: ");
+                            pos = read.nextInt();
+                            if (pos < 0 || pos > registro.size() - 1) {
+                                System.out.println("Abortando! Debe ingresar una posición válida");
+                            } else {
+                                Eliminar(registro, pos);
+                            }
+                        }
                         break;
                     case 3:
                         if (!log) {
@@ -54,15 +66,39 @@ public class Lab2_RafaelFlores_31711187 {
                         }
                         break;
                     case 4:
+                        if (registro.isEmpty()) {
+                            System.out.println("No hay nada que mostrar!");
+                        }else{
+                            System.out.println("Algo");
+                        }
                         break;
                     case 5:
-                        Listar(registro);
+                        if (registro.isEmpty()) {
+                            System.out.println("No hay nada que mostrar!");
+                        }else{
+                            Listar(registro);
+                        }
                         break;
                     case 6:
+                        if (registro.isEmpty()) {
+                            System.out.println("No hay nada que mostrar!");
+                        }else{
+                            System.out.println("Algo");
+                        }
                         break;
                     case 7:
+                        if (registro.isEmpty()) {
+                            System.out.println("No hay nada que mostrar!");
+                        }else{
+                            System.out.println("Algo");
+                        }
                         break;
                     case 8:
+                        if (registro.isEmpty()) {
+                            System.out.println("No hay nada que mostrar!");
+                        }else{
+                            System.out.println("Algo");
+                        }
                         break;
                 }
             }
@@ -128,13 +164,18 @@ public class Lab2_RafaelFlores_31711187 {
     }
     
     public static void Listar(ArrayList<Universidad> temp){
-        System.out.println("+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
-        System.out.println("| Nombre U. | Nombre R. | Sucursal | Año C.| N. Maestros | N. Estudiantes |  Costo  |         Nivel        |");
-        System.out.println("+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
+        System.out.println("+------+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
+        System.out.println("| Pos. | Nombre U. | Nombre R. | Sucursal | Año C.| N. Maestros | N. Estudiantes |  Costo  |         Nivel        |");
+        System.out.println("+------+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
         for (int i = 0; i < temp.size(); i++) {
-            System.out.print(temp.get(i).toString()+"\n");
-            System.out.print("+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+\n");
+            System.out.print("|  "+i+"   "+temp.get(i).toString()+"\n");
+            System.out.print("+------+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+\n");
         }
+    }
+    
+    public static void Eliminar(ArrayList<Universidad> temp, int pos){
+        temp.remove(pos);
+        System.out.println("El registro se elimino con éxito!");
     }
     
 }
