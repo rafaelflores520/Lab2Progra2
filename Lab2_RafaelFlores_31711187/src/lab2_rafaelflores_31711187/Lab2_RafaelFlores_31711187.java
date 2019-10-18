@@ -136,7 +136,33 @@ public class Lab2_RafaelFlores_31711187 {
                         if (registro.isEmpty()) {
                             System.out.println("No hay nada que mostrar!");
                         }else{
-                            System.out.println("Algo");
+                            Listar(registro);
+                            System.out.println("Ingrese la Universidad a Descender: ");
+                            pos = read.nextInt();
+                            if (pos < 0 || pos > registro.size() - 1) {
+                                System.out.println("Abortando! Debe ingresar una posición válida");
+                            } else {
+                                String cambio = registro.get(pos).getNivel();
+                                switch(cambio){
+                                    case "Publica":
+                                        Eliminar(registro, pos);
+                                        break;
+                                    case "Publica Prestigiosa":
+                                        registro.get(pos).setNivel("Publica");
+                                        break;
+                                    case "Nacional":
+                                        registro.get(pos).setNivel("Publica Prestigiosa");
+                                        uNacional = -1;
+                                        break;
+                                    case "Privada":
+                                        Eliminar(registro, pos);
+                                        break;
+                                    case "Privada Prestigiosa":
+                                        registro.get(pos).setNivel("Privada");
+                                        break;
+                                }
+                                System.out.println("La bajada de nivel se realizo con éxito");
+                            }
                         }
                         break;
                     case 8:
