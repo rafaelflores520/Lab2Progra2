@@ -56,7 +56,7 @@ public class Lab2_RafaelFlores_31711187 {
                             System.out.println("Ingrese su contraseña: ");
                             String pass = read.next();
                             if (user.equals("leobanegas") && pass.equals("99")) {
-                                System.out.println("Bienvenido a la Sistema de Gestión de Uniersidades Leonardo!");
+                                System.out.println("Bienvenido a la Sistema de Gestión de Universidades Leonardo!");
                             } else {
                                 System.out.println("Su usuario o contraseña son incorrectos!");
                             }
@@ -83,7 +83,23 @@ public class Lab2_RafaelFlores_31711187 {
                         if (registro.isEmpty()) {
                             System.out.println("No hay nada que mostrar!");
                         }else{
-                            System.out.println("Algo");
+                            Listar(registro);
+                            System.out.println("Ingrese la posición a modificar: ");
+                            pos = read.nextInt();
+                            if (pos < 0 || pos > registro.size() - 1) {
+                                System.out.println("Abortando! Debe ingresar una posición válida");
+                            } else {
+                                System.out.println("Ingrese el número de lo que desea modificar:"
+                                        + "\n\t 1. Nombre de la Universida"
+                                        + "\n\t 2. Nombre del Rector"
+                                        + "\n\t 3. Sucursal"
+                                        + "\n\t 4. Año de Creación"
+                                        + "\n\t 5. Número de Maestros"
+                                        + "\n\t 6. Numero de Estudiantes");
+                                int modOp = read.nextInt();
+                                Modificar(registro, pos, modOp);
+                                System.out.println("Su Modificación fue exitosa!");
+                            }
                         }
                         break;
                     case 7:
@@ -164,6 +180,7 @@ public class Lab2_RafaelFlores_31711187 {
     }
     
     public static void Listar(ArrayList<Universidad> temp){
+        System.out.println("Listando Universidades...");
         System.out.println("+------+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
         System.out.println("| Pos. | Nombre U. | Nombre R. | Sucursal | Año C.| N. Maestros | N. Estudiantes |  Costo  |         Nivel        |");
         System.out.println("+------+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
@@ -176,6 +193,35 @@ public class Lab2_RafaelFlores_31711187 {
     public static void Eliminar(ArrayList<Universidad> temp, int pos){
         temp.remove(pos);
         System.out.println("El registro se elimino con éxito!");
+    }
+    
+    public static void Modificar(ArrayList<Universidad> temp, int pos, int op){
+        switch(op){
+            case 1:
+                System.out.println("Ingrese el nuevo Nombre de la Universidad");
+                temp.get(pos).setNombre(read.next());
+                break;
+            case 2:
+                System.out.println("Ingrese el nuevo nombre del Rector de la Universidad");
+                temp.get(pos).setNombreRector(read.next());
+                break;
+            case 3:
+                System.out.println("Ingrese la nueva Sucursal de la Universidad");
+                temp.get(pos).setSucursal(read.next());
+                break;
+            case 4:
+                System.out.println("Ingrese el nuevo Año de creación de la Universidad");
+                temp.get(pos).setAñoCreacion(read.nextInt());
+                break;
+            case 5:
+                System.out.println("Ingrese la nueva cantidad de Maestros de la Universidad");
+                temp.get(pos).setNumMaestro(read.nextInt());
+                break;
+            case 6:
+                System.out.println("Ingrese la nueva cantidad de Alumnos de la Universidad");
+                temp.get(pos).setNumEstudiante(read.nextInt());
+                break;
+        }
     }
     
 }
