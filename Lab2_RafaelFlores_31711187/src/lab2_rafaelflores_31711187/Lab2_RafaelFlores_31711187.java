@@ -4,6 +4,7 @@
 package lab2_rafaelflores_31711187;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Lab2_RafaelFlores_31711187 {
     public static Scanner read = new Scanner(System.in);
@@ -11,7 +12,7 @@ public class Lab2_RafaelFlores_31711187 {
     public static void main(String[] args) {
         boolean log = false;
         ArrayList<Universidad> registro = new ArrayList<>();
-        int pos;
+        int pos, uNacional = -1;
         while (true) {            
             System.out.println("¡Bienvenido!");
             System.out.println("Ingrese la opción de su elección:"
@@ -33,7 +34,7 @@ public class Lab2_RafaelFlores_31711187 {
             }else{
                 switch(op){
                     case 1:
-                        registro.add(Agregar());
+                        registro.add(Agregar(registro));
                         break;
                     case 2:
                         if (registro.isEmpty()) {
@@ -66,11 +67,7 @@ public class Lab2_RafaelFlores_31711187 {
                         }
                         break;
                     case 4:
-                        if (registro.isEmpty()) {
-                            System.out.println("No hay nada que mostrar!");
-                        }else{
-                            System.out.println("Algo");
-                        }
+                        
                         break;
                     case 5:
                         if (registro.isEmpty()) {
@@ -97,7 +94,7 @@ public class Lab2_RafaelFlores_31711187 {
                                         + "\n\t 5. Número de Maestros"
                                         + "\n\t 6. Numero de Estudiantes");
                                 int modOp = read.nextInt();
-                                Modificar(registro, pos, modOp);
+                                Modificar(registro, pos, modOp, "");
                                 System.out.println("Su Modificación fue exitosa!");
                             }
                         }
@@ -113,7 +110,30 @@ public class Lab2_RafaelFlores_31711187 {
                         if (registro.isEmpty()) {
                             System.out.println("No hay nada que mostrar!");
                         }else{
-                            System.out.println("Algo");
+                            boolean flag = false;
+                            System.out.println("Cambiando de forma AL Azar el título de Universidad Nacional!");
+                            Random rand = new Random();
+                            int last = uNacional, cont = 0;
+                            while(!flag){
+                                uNacional = rand.nextInt(registro.size());
+                                if (last == -1) {
+                                    if (registro.get(uNacional).getNivel().equals("Publica") || registro.get(uNacional).getNivel().equals("Publica Prestigiosa")) {
+                                        Modificar(registro, uNacional, 7, "Nacional");
+                                        flag = true;
+                                    }
+                                }else{
+                                    if (registro.get(uNacional).getNivel().equals("Publica") || registro.get(uNacional).getNivel().equals("Publica Prestigiosa")) {
+                                        Modificar(registro, last, 7, "Publica Prestigiosa");
+                                        Modificar(registro, uNacional, 7, "Nacional");
+                                        flag = true;
+                                    }
+                                }
+                                if (cont == 3) {
+                                    System.out.println("Se acabaron los intentos :(, vuelva a probar de nuevo");
+                                    break;
+                                }
+                                cont++;
+                            }
                         }
                         break;
                 }
@@ -121,14 +141,26 @@ public class Lab2_RafaelFlores_31711187 {
         }
     }
     
-    public static Universidad Agregar(){
+    public static Universidad Agregar(ArrayList<Universidad> temp){
         Universidad u = new Universidad();
         System.out.println("Ingrese el nombre de la universidad: ");
-        u.setNombre(read.next());
+        String nombre = read.next(); 
+        u.setNombre(nombre);
+        nombre = chkNombre(temp, nombre);
         System.out.println("Ingrese el nombre del rector de la universidad: ");
         u.setNombreRector(read.next());
-        System.out.println("Ingrese la sucursal de la universidad: ");
-        u.setSucursal(read.next());
+        byte flag = 0;
+        do{
+            System.out.println("Ingrese la sucursal de la universidad: ");
+            String sucursal = read.next();
+            if (sucursal.equals(nombre)) {
+                System.out.println("Debe ingresar una Sucursal distinta!");
+            }else{
+                u.setSucursal(sucursal);
+                flag = 1;
+            }
+        }while(flag == 0);
+        
         int nums;
         do {            
             System.out.println("Ingrese el año de creación de la Universidad: ");
@@ -158,7 +190,7 @@ public class Lab2_RafaelFlores_31711187 {
                 u.setNumEstudiante(nums);
             }
         } while (nums < 1);
-        byte flag = 0;
+        flag = 0;
         do {            
             System.out.println("Ingrese el nivel de la Universidad: "
                     + "\n\t1. Privada"
@@ -179,6 +211,16 @@ public class Lab2_RafaelFlores_31711187 {
         return u;
     }
     
+    public static String chkNombre(ArrayList<Universidad> temp, String nombre){
+        String chk = "";
+        for (int i = 0; i < temp.size(); i++) {
+            if (temp.get(i).getNombre().equals(nombre)) {
+                chk = temp.get(i).getSucursal();
+            }
+        }
+        return chk;
+    }
+    
     public static void Listar(ArrayList<Universidad> temp){
         System.out.println("Listando Universidades...");
         System.out.println("+------+-----------+-----------+----------+-------+-------------+----------------+---------+----------------------+");
@@ -195,7 +237,7 @@ public class Lab2_RafaelFlores_31711187 {
         System.out.println("El registro se elimino con éxito!");
     }
     
-    public static void Modificar(ArrayList<Universidad> temp, int pos, int op){
+    public static void Modificar(ArrayList<Universidad> temp, int pos, int op, String nivel){
         switch(op){
             case 1:
                 System.out.println("Ingrese el nuevo Nombre de la Universidad");
@@ -220,6 +262,10 @@ public class Lab2_RafaelFlores_31711187 {
             case 6:
                 System.out.println("Ingrese la nueva cantidad de Alumnos de la Universidad");
                 temp.get(pos).setNumEstudiante(read.nextInt());
+                break;
+            case 7:
+                System.out.println("Ingrese el nuevo estado de la Universidad");
+                temp.get(pos).setNivel(nivel);
                 break;
         }
     }
